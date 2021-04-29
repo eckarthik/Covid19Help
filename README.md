@@ -10,11 +10,19 @@
      ```sh
     pip3 install -r requirements.txt
     ```
-- Start the Server using below command
+- Start the django server using below command
      ```sh
     python manage.py runserver
     ```
-
+ - Start the react server using below commands
+    ```sh
+    cd frontend
+    npm init
+    npm start
+    ```
+    _Run the `npm init` command only once at the initial stage_
+ - Access the following URL in the browser for UI
+    `http://localhost:3000/`
 ## APIs
 
 | EndPoint      | Source | Description | Status |
