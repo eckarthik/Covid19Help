@@ -15,6 +15,14 @@
     python manage.py runserver
     ```
 
+## APIs
+
+| EndPoint      | Source | Description |
+| ----------- | ----------- |----------- |
+| /api/oxygenStats      | GoogleSheet - Oxygen       | Provides the oxygen availability details|
+| /api/caseStats   | MOHFW website        | Current Cases count in India|
+
+
 ## Development
 
 Want to contribute? Great!
