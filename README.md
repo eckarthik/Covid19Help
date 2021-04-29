@@ -17,10 +17,10 @@
 
 ## APIs
 
-| EndPoint      | Source | Description |
-| ----------- | ----------- |----------- |
-| /api/oxygenStats      | GoogleSheet - Oxygen       | Provides the oxygen availability details|
-| /api/caseStats   | MOHFW website        | Current Cases count in India|
+| EndPoint      | Source | Description | Status |
+| ----------- | ----------- |----------- |----------- |
+| /api/oxygenStats      | GoogleSheet - Oxygen       | Provides the oxygen availability details|:heavy_check_mark:|
+| /api/caseStats   | MOHFW website        | Current Cases count in India|:heavy_check_mark:|
 
 
 ## Development
