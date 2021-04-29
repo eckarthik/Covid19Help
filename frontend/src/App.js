@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
+import Layout from './containers/Layout/Layout';
+import {Route} from 'react-router-dom';
+import OxygenStatus from './components/OxygenStatus/OxygenStatus';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>Homepage</h1>
-      </div>
+      <Layout>
+        <div>
+          <Route path="/" exact component={OxygenStatus}/>
+        </div>
+      </Layout>
+      
     )
   }
 }
