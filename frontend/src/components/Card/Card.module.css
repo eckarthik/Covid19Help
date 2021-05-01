@@ -1,0 +1,22 @@
+.Card {
+    margin: 20px;
+    padding: 20px;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+}
+
+.Card:hover {
+    transform: scale(1.05);
+}
+
+.CardIcon {
+    text-align: center;
+    font-size: 100px;
+}
+
+.CardText {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    color:black;
+}

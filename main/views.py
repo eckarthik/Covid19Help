@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from oauth2client.service_account import ServiceAccountCredentials
-import gspread, requests, json
+import gspread, requests, json, csv
 
 # Create your views here.
 def index(request):
@@ -26,3 +26,15 @@ def current_cases_data(request):
 
     data = json.loads(requests.get("https://www.mohfw.gov.in/data/datanew.json").text)
     return JsonResponse(data,safe=False)
+
+def state_wise_case_history(request):
+    response = requests.get("https://api.covid19india.org/csv/latest/state_wise_daily.csv",
+                            verify=False).content.decode('utf-8')
+    reader = csv.DictReader(response.split("\n"))
+    data = {}
+    data["confirmed"] = []
+    data["recovered"] = []
+    data["deceased"] = []
+    for record in reader:
+        data[record["Status"].lower()].append(dict(record))
+    return JsonResponse(data, safe=False)

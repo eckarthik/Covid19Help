@@ -1,18 +1,23 @@
 import React, {Component} from 'react';
 import Loading from '../Loading/Loading';
+import axios from 'axios';
+import {Table,Container} from 'react-bootstrap';
 
 class OxygenStatus extends Component {
 
     state = {
-        data:[]
+        data:[],
+        error:null
     }
 
     componentDidMount() {
-        fetch("http://127.0.0.1:8000/api/oxygenStatus")
-            .then(response => response.json())
+        axios.get("http://127.0.0.1:8000/api/oxygenStatus")
             .then(response => {
-                this.setState({data:response})
+                this.setState({data:response.data});
             })
+            .catch(error => {
+                this.setState({error:error});
+            });
     }
 
     render() {
@@ -21,9 +26,9 @@ class OxygenStatus extends Component {
             data = <Loading loadingMessage="Fetching data... Please wait"/>
         }
         else {
-            data = <div style={{marginTop:"50px"}}>
+            data = <Container style={{marginTop:"50px"}}>
             <h1 style={{textAlign:"center"}}>Oxygen Status</h1>
-            <table border="border" style={{margin:"auto",textAlign:"center",marginTop:"50px",borderCollapse:"collapse"}}>
+            <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
                         <th>
@@ -58,12 +63,13 @@ class OxygenStatus extends Component {
                         </tr>
                     })}
                  </tbody>
-            </table>
-        </div>
+            </Table>
+        </Container>
         }
         return (
             <div>
                 {data}
+                <p>{this.state.error ? JSON.stringify(this.state.error) : null}</p>
             </div>
            
         )

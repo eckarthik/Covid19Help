@@ -44,9 +44,9 @@ class Navbar extends Component {
             activeClasses.push("nav-active");
         }
         return (
-            <nav>
+            <nav class="navbar">
                 <div className="logo">
-                    <h4><i className="fab fa-instagram"></i> COVID-19 HELP</h4>
+                    <h4><i class="fas fa-virus"></i> COVID-19 HELP</h4>
                 </div>
                 <ul ref={this.navLinksRef} className={activeClasses.join(' ')}>
                     <li>
