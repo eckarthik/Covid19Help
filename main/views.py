@@ -7,7 +7,7 @@ import gspread, requests, json
 def index(request):
     """Index Page view"""
 
-    return render(request,"index.html")
+    return render(request,"build/index.html")
 
 def oxygen_data(request):
     """Returns the oxygen data as JSON from the spreadsheet"""

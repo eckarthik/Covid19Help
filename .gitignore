@@ -2,3 +2,4 @@ venv
 db.sqlite3
 frontend/node_modules
 *.pyc
+**/build
