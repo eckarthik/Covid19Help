@@ -11,7 +11,7 @@ class OxygenStatus extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://127.0.0.1:8000/api/oxygenStatus")
+        axios.get("api/oxygenStatus")
             .then(response => {
                 this.setState({data:response.data});
             })

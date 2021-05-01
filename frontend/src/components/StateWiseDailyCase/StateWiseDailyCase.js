@@ -1,13 +1,13 @@
 import React,{useEffect,useState} from 'react';
 import {Line} from 'react-chartjs-2';
-import axios from 'axios';
+import axios from '../../axios';
 
 const StateWiseDailyCase = (props) => {
     const [labels,setLabels] = useState([]);
     const [data,setData] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/stateWiseCaseHistory")
+        axios.get("api/stateWiseCaseHistory")
         .then(response => {
             let totalData = response.data[props.status].length;
             let last90daysData = response.data[props.status].splice(totalData-90,totalData-1)
@@ -32,8 +32,8 @@ const StateWiseDailyCase = (props) => {
           },
         ],
       };
-    return <div>
-            <Line data={graphData}/>
+    return <div style={{width:"100%",height:"300px"}}>
+            <Line data={graphData} options={{responsive:true,maintainAspectRatio:false}}/>
         </div>
 
 };
