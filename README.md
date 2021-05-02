@@ -30,6 +30,7 @@
 | /api/oxygenStats      | GoogleSheet - Oxygen       | Provides the oxygen availability details|:heavy_check_mark:|
 | /api/caseStats   | MOHFW website        | Current Cases count in India|:heavy_check_mark:|
 | /api/stateWiseCaseHistory   | covid19india.org        | State wise Confirmed/Recovered/Deceased Cases count in India|:heavy_check_mark:|
+| /api/hospitalbeds   | GoogleSheet- Hospital Beds        | Current Hospital Beds Availability|:heavy_check_mark:|
 
 
 ## Development

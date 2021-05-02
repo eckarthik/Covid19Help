@@ -18,8 +18,27 @@ def oxygen_data(request):
                                                                    "https://www.googleapis.com/auth/drive.file",
                                                                    "https://www.googleapis.com/auth/drive"])
     client = gspread.authorize(credential)
-    gsheet = client.open("Oxygen").sheet1
-    return JsonResponse(gsheet.get_all_records(),safe=False)
+    # gsheet = client.open("Oxygen").sheet1
+    # data = gsheet.get_all_records()
+    data = []
+    filtered_data = []
+    worksheet_list = client.open("Oxygen").worksheets()
+
+    # To fetch the data from all worksheets in the Oxygen sheet
+    # for spreadsheet in client.open("Oxygen"):
+        # Get spreadsheet's worksheets
+        # worksheets = spreadsheet.worksheets()
+    print(len(worksheet_list))
+    for ws in worksheet_list[0:len(worksheet_list)-2]:
+        # Append the values of the worksheet to values
+        data.extend(ws.get_all_records())
+
+    #print(data[1]["Active"])
+    # filtering active data out of the whole data
+    for row in data:
+        if row['Active'].lower().strip() == "active":
+            filtered_data.append(row)
+    return JsonResponse(filtered_data,safe=False)
 
 def current_cases_data(request):
     """Returns the current cases count as per MOHFW"""
@@ -38,3 +57,33 @@ def state_wise_case_history(request):
     for record in reader:
         data[record["Status"].lower()].append(dict(record))
     return JsonResponse(data, safe=False)
+
+    
+def hospital_beds_data(request):
+    credential = ServiceAccountCredentials.from_json_keyfile_name("credentials.json",
+                                                                  ["https://spreadsheets.google.com/feeds",
+                                                                   "https://www.googleapis.com/auth/spreadsheets",
+                                                                   "https://www.googleapis.com/auth/drive.file",
+                                                                   "https://www.googleapis.com/auth/drive"])
+    client = gspread.authorize(credential)
+    # gsheet = client.open("Oxygen").sheet1
+    # data = gsheet.get_all_records()
+    data = []
+    filtered_data = []
+    worksheet_list = client.open("Hospital Beds").worksheets()
+
+    # To fetch the data from all worksheets in the Oxygen sheet
+    # for spreadsheet in client.open("Oxygen"):
+    # Get spreadsheet's worksheets
+    # worksheets = spreadsheet.worksheets()
+    print(len(worksheet_list))
+    for ws in worksheet_list[0:len(worksheet_list) - 2]:
+        # Append the values of the worksheet to values
+        data.extend(ws.get_all_records())
+
+    # print(data[1]["Active"])
+    # filtering active data out of the whole data
+    for row in data:
+        if row['Active'].lower().strip() == "active":
+            filtered_data.append(row)
+    return JsonResponse(filtered_data, safe=False)
