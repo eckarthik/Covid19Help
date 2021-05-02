@@ -30,9 +30,8 @@ nav.navbar {
     justify-content: space-around;
     width:50%;
     background-color: inherit;
-
 }
-.nav-links a {
+.nav-links li a {
     text-decoration: none;
     letter-spacing: 3px;
     font-size: 14px;
@@ -104,4 +103,5 @@ nav.navbar {
 
 .nav-links li {
     list-style: none;
+    text-decoration: none;
 }

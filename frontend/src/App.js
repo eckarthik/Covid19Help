@@ -4,6 +4,8 @@ import {Route} from 'react-router-dom';
 import Homepage from './components/Homepage/Homepage';
 import OxygenStatus from './components/OxygenStatus/OxygenStatus';
 import StateWiseDailyCase from './components/StateWiseDailyCase/StateWiseDailyCase';
+import HospitalBeds from './components/HospitalBeds/HospitalBeds';
+import './App.css';
 
 class App extends Component {
   render() {
@@ -13,6 +15,7 @@ class App extends Component {
           <Route path="/" exact component={Homepage}/>
           <Route path="/oxygenCylinder" exact component={OxygenStatus} />
           <Route path="/graph" exact component={StateWiseDailyCase}/>
+          <Route path="/hospitalBeds" exact component={HospitalBeds} />
         </div>
       </Layout>
       
