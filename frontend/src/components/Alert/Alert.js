@@ -1,4 +1,3 @@
-import { defaults } from 'chart.js';
 import React from 'react';
 import classes from './Alert.module.css';
 

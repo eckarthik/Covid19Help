@@ -11,6 +11,16 @@ class OxygenStatus extends Component {
         error:null
     }
 
+    column_name_mappings = {
+        "id":"ID",
+        "record_id":"Record ID",
+        "state_name":"State",
+        "distributor_name":"Distributor Name",
+        "contact_information":"Contact Information",
+        "created_at":"Created At",
+        "updated_at":"Updated At"
+    }
+
     componentDidMount() {
         axios.get("api/oxygenStatus")
             .then(response => {
@@ -27,17 +37,15 @@ class OxygenStatus extends Component {
             data = <Loading loadingMessage="Fetching data... Please wait"/>
         }
         else {
-            {
-                let columns = [];
-                let tableData = this.state.data;
-                let keys = Object.keys(this.state.data[0]);
-                for(let key of keys) {
-                    columns.push({title:key,field:key});
-                }
-                console.log("Columns = ",columns);
-                console.log("Data = ",data);
-                data = <Table columns={columns} data={tableData} tableTitle="Oxygen Cylinders Availability"/>
+            let columns = [];
+            let tableData = this.state.data;
+            let keys = Object.keys(this.state.data[0]);
+            for(let key of keys) {
+                columns.push({title:this.column_name_mappings[key],field:key});
             }
+            console.log("Columns = ",columns);
+            console.log("Data = ",data);
+            data = <Table columns={columns} data={tableData} tableTitle="Oxygen Cylinders Availability"/>
         }
         return (
             <div>

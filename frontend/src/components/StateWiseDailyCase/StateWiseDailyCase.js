@@ -21,7 +21,7 @@ const StateWiseDailyCase = (props) => {
             setLabels(labels);
             setData(caseCountData);
         })
-    },[]);
+    },[props.status]);
 
     let graphData = {
         labels: labels,
