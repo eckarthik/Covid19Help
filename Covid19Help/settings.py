@@ -80,16 +80,26 @@ WSGI_APPLICATION = 'Covid19Help.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'covid_db',
-        "USER": 'postgres',
-        "PASSWORD": "test1234$",
-        "HOST": 'localhost'
+if os.environ.get('HEROKU_DEPLOYMENT'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'd8avolm2j9rujo',
+            "USER": 'dxrpxwotlyvjet',
+            "PASSWORD": "745efbca212b2668e07e1380941d1b1eb6b9b33a3d4dd4fdb3c742657c000108",
+            "HOST": 'ec2-54-155-87-214.eu-west-1.compute.amazonaws.com'
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'covid_db',
+            "USER": 'postgres',
+            "PASSWORD": "test1234$",
+            "HOST": 'localhost'
+        }
+    }
 
 
 # Password validation
