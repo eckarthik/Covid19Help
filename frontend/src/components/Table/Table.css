@@ -1,0 +1,22 @@
+table {
+    font-size: 15px;
+}
+
+thead {
+    font-size: 50px;
+}
+
+.tableTitle {
+    font-size: 20px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    table {
+        font-size: 10px;
+    }
+
+    .tableTitle {
+        font-size: 12px;
+    }
+}
