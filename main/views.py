@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
-from oauth2client.service_account import ServiceAccountCredentials
-import gspread, requests, json, csv
+from .helper_functions import api_data_fetcher,write_oxygendata_to_db,check_and_update_db,fetch_time_difference
+from .models import OxygenData
+import datetime
+
 
 # Create your views here.
 def index(request):
@@ -9,42 +11,35 @@ def index(request):
 
     return render(request,"build/index.html")
 
+
 def oxygen_data(request):
     """Returns the oxygen data as JSON from the spreadsheet"""
+    # data = OxygenData.objects.all().values()
+    # data = OxygenData.objects.filter(id=1).values()
+    diff = fetch_time_difference()
+    # data = []
+    api_data = []
+    data = api_data_fetcher("Oxygen")
 
-    credential = ServiceAccountCredentials.from_json_keyfile_name("credentials.json",
-                                                                  ["https://spreadsheets.google.com/feeds",
-                                                                   "https://www.googleapis.com/auth/spreadsheets",
-                                                                   "https://www.googleapis.com/auth/drive.file",
-                                                                   "https://www.googleapis.com/auth/drive"])
-    client = gspread.authorize(credential)
-    # gsheet = client.open("Oxygen").sheet1
-    # data = gsheet.get_all_records()
-    data = []
-    filtered_data = []
-    worksheet_list = client.open("Oxygen").worksheets()
+    if not(OxygenData.objects.filter(id=1).exists()):
+        write_oxygendata_to_db(data)
+        db_data = list(OxygenData.objects.values())
 
-    # To fetch the data from all worksheets in the Oxygen sheet
-    # for spreadsheet in client.open("Oxygen"):
-        # Get spreadsheet's worksheets
-        # worksheets = spreadsheet.worksheets()
-    print(len(worksheet_list))
-    for ws in worksheet_list[0:len(worksheet_list)-2]:
-        # Append the values of the worksheet to values
-        data.extend(ws.get_all_records())
+    elif diff >= 0:
+        check_and_update_db(api_data=data)
+        db_data = list(OxygenData.objects.values())
+    else:
+        db_data = list(OxygenData.objects.values())
 
-    #print(data[1]["Active"])
-    # filtering active data out of the whole data
-    for row in data:
-        if row['Active'].lower().strip() == "active":
-            filtered_data.append(row)
-    return JsonResponse(filtered_data,safe=False)
+    return JsonResponse(db_data, safe=False)
+
 
 def current_cases_data(request):
     """Returns the current cases count as per MOHFW"""
 
     data = json.loads(requests.get("https://www.mohfw.gov.in/data/datanew.json").text)
     return JsonResponse(data,safe=False)
+
 
 def state_wise_case_history(request):
     response = requests.get("https://api.covid19india.org/csv/latest/state_wise_daily.csv",
@@ -60,30 +55,10 @@ def state_wise_case_history(request):
 
     
 def hospital_beds_data(request):
-    credential = ServiceAccountCredentials.from_json_keyfile_name("credentials.json",
-                                                                  ["https://spreadsheets.google.com/feeds",
-                                                                   "https://www.googleapis.com/auth/spreadsheets",
-                                                                   "https://www.googleapis.com/auth/drive.file",
-                                                                   "https://www.googleapis.com/auth/drive"])
-    client = gspread.authorize(credential)
-    # gsheet = client.open("Oxygen").sheet1
-    # data = gsheet.get_all_records()
-    data = []
-    filtered_data = []
-    worksheet_list = client.open("Hospital Beds").worksheets()
+    data = api_data_fetcher("Hospital Beds")
+    return JsonResponse(data, safe=False)
 
-    # To fetch the data from all worksheets in the Oxygen sheet
-    # for spreadsheet in client.open("Oxygen"):
-    # Get spreadsheet's worksheets
-    # worksheets = spreadsheet.worksheets()
-    print(len(worksheet_list))
-    for ws in worksheet_list[0:len(worksheet_list) - 2]:
-        # Append the values of the worksheet to values
-        data.extend(ws.get_all_records())
 
-    # print(data[1]["Active"])
-    # filtering active data out of the whole data
-    for row in data:
-        if row['Active'].lower().strip() == "active":
-            filtered_data.append(row)
-    return JsonResponse(filtered_data, safe=False)
+def icu_data(request):
+    data = api_data_fetcher("ICU", index_start=1)
+    return JsonResponse(data, safe=False)
