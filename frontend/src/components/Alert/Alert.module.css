@@ -5,9 +5,23 @@
     margin:auto;
     border-radius: 3px;
     margin-top:30px;
+    margin-bottom:20px;
 }
 
-.AlertText {
+.AlertMessage {
     font-weight: bold;
     font-size: 15px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .AlertMessage {
+        font-size:12px;
+    }
+
+    .Alert {
+        height: 70px;
+        
+    }
+
 }

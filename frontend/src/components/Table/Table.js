@@ -1,6 +1,7 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import {Container} from 'react-bootstrap';
+import './Table.css';
 
 const Table  = (props) => {
     console.log("Table js file");
@@ -8,13 +9,18 @@ const Table  = (props) => {
     return (
         <Container fluid>
             <MaterialTable
-                style={{margin:"50px",textAlign:"center",backgroundColor:"#f5f6fa",boxShadow:"1px 2px 13px -1px rgba(0,0,0,0.25);",WebkitBoxShadow:"1px 2px 13px -1px rgba(0,0,0,0.25);",MozBoxShadow:"1px 2px 13px -1px rgba(0,0,0,0.25);"}}
+                style={{textAlign:"center",backgroundColor:"#f5f6fa",boxShadow:"1px 2px 13px -1px rgba(0,0,0,0.25);",WebkitBoxShadow:"1px 2px 13px -1px rgba(0,0,0,0.25);",MozBoxShadow:"1px 2px 13px -1px rgba(0,0,0,0.25);"}}
                 columns={props.columns}
                 data={props.data}
-                title={props.tableTitle}
+                title={
+                    <p class="tableTitle">
+                        {props.tableTitle}
+                    </p>
+                }
                 options={{
                     headerStyle:{
-                        fontWeight:"bold"
+                        fontWeight:"bold",
+                        fontSize:"10px"
                     },
                     exportButton:true
                 }}

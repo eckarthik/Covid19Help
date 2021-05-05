@@ -7,3 +7,12 @@
     text-align: center;
     margin-top: 50px;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .disclaimer {
+        min-height: 1vh;
+        font-size: 12px;
+        padding:20px
+    }
+}
