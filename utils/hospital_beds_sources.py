@@ -1,0 +1,16 @@
+HOSPITAL_BEDS_SOURCES = {
+"Delhi":"https://coronabeds.jantasamvad.org",
+"Ahmedabad":"https://ahna.org.in/covid19.html",
+"Bengaluru":"https://bbmpgov.com/chbms",
+"Gandhinagar":"https://vmc.gov.in/HospitalModuleGMC/HospitalBedsDetails.aspx?tid=1",
+"Pune":"https://covidpune.com",
+"Andhra Pradesh":"http://dashboard.covid19.ap.gov.in/ims/hospbed_reports",
+"Chhattisgarh":"https://cg.nic.in/health/covid19/RTPBedAvailable.aspx",
+"Haryana":"https://coronaharyana.in",
+"Madhya Pradesh":"http://sarthak.nhmmp.gov.in/covid/facility-bed-occupancy-details",
+"Rajasthan":"https://covidinfo.rajasthan.gov.in",
+"Tamil Nadu":"https://stopcorona.tn.gov.in/beds.php",
+"Telangana":"https://health.telangana.gov.in",
+"Uttarakhand":"https://covid19.uk.gov.in/bedssummary.aspx",
+"West Bengal":"https://www.wbhealth.gov.in/pages/corona/bed_availability"
+}

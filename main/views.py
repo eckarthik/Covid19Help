@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from .helper_functions import api_data_fetcher,write_oxygendata_to_db,check_and_update_db,fetch_time_difference
 from .models import OxygenData
-import datetime
+import datetime,requests,csv
 
+from utils.hospital_beds_sources import HOSPITAL_BEDS_SOURCES
 
 # Create your views here.
 def index(request):
@@ -58,7 +59,9 @@ def hospital_beds_data(request):
     data = api_data_fetcher("Hospital Beds")
     return JsonResponse(data, safe=False)
 
-
 def icu_data(request):
     data = api_data_fetcher("ICU", index_start=1)
     return JsonResponse(data, safe=False)
+
+def hospital_beds_sources(request):
+    return JsonResponse(HOSPITAL_BEDS_SOURCES, safe=False)
