@@ -3,8 +3,9 @@ from django.http import HttpResponse,JsonResponse
 from .helper_functions import api_data_fetcher,write_oxygendata_to_db,check_and_update_db,fetch_time_difference
 from .models import OxygenData
 import datetime,requests,csv
-
 from utils.hospital_beds_sources import HOSPITAL_BEDS_SOURCES
+from utils.plasma_website_sources import PLASMA_DETAILS
+
 
 # Create your views here.
 def index(request):
@@ -26,7 +27,7 @@ def oxygen_data(request):
         write_oxygendata_to_db(data)
         db_data = list(OxygenData.objects.values())
 
-    elif diff >= 0:
+    elif diff >= 15:
         check_and_update_db(api_data=data)
         db_data = list(OxygenData.objects.values())
     else:
@@ -59,9 +60,15 @@ def hospital_beds_data(request):
     data = api_data_fetcher("Hospital Beds")
     return JsonResponse(data, safe=False)
 
+
 def icu_data(request):
     data = api_data_fetcher("ICU", index_start=1)
     return JsonResponse(data, safe=False)
 
+
 def hospital_beds_sources(request):
     return JsonResponse(HOSPITAL_BEDS_SOURCES, safe=False)
+
+
+def plasma_sources(request):
+    return JsonResponse(PLASMA_DETAILS, safe=False)
