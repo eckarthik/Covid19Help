@@ -2,6 +2,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 import gspread, requests, json, csv
 from .models import OxygenData
 import datetime
+import tweepy as tw
+from twitter_credentials import ACCESS_TOKEN, ACCESS_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET
 
 
 # Helper functions
@@ -97,3 +99,26 @@ def fetch_time_difference():
         difference = datetime.datetime.now() - db_datetime[0]['updated_at']
         difference_in_minutes = difference.total_seconds()/60
         return difference_in_minutes
+
+
+def tweet_id_fetcher(hashtags):
+    auth = tw.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    api = tw.API(auth, wait_on_rate_limit=True)
+
+    tweet_ids = []
+    search_words = ["Available", "verified"]
+
+    for i in hashtags:
+        search_words.append(i)
+
+    today = datetime.date.today()
+    date_since = today - datetime.timedelta(days=2)
+
+    tweets = tw.Cursor(api.search, q=search_words, lang="en", since=date_since).items(20)
+
+    for tweet in tweets:
+        tweet_ids.append(tweet.id)
+        print(tweet.id)
+
+    return tweet_ids

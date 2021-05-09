@@ -9,5 +9,6 @@ urlpatterns = [
     path('api/hospitalbeds', views.hospital_beds_data),
     path('api/icu', views.icu_data),
     path("api/hospitalBedsSources",views.hospital_beds_sources),
-    path("api/plasmasources", views.plasma_sources)
+    path("api/plasmasources", views.plasma_sources),
+    path('api/fetchTweets', views.tweet_id_fetcher)
 ]
