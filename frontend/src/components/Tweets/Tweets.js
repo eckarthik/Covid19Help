@@ -4,40 +4,50 @@ import {Card} from 'react-bootstrap';
 import Loading from '../Loading/Loading';
 import classes from './Tweets.module.css';
 import axios from 'axios';
+import axiosBackend from '../../axios';
+import {pageTitles} from '../../constants';
+import {useLocation} from 'react-router-dom';
 
 const Tweets = (props) => {
 
     const [userCity,setUserCity] = useState(null);
+    const [tweetIds,setTweetIds] = useState([]);
+    const [userRequirement,setUserRequirement] = useState(null);
+    const [tweetLoaded,setTweetLoaded] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         axios.get("https://geolocation-db.com/json/")
             .then(response => response.data)
-            .then(response => {
-                setUserCity(response["city"]);
-            })
-    },[])
+            .then(userCityResponse => {
+                let locationName = location.pathname.replace("/","");
+                axiosBackend.get("/api/fetchTweets?location="+userCityResponse["city"]+"&requirement="+pageTitles[locationName])
+                    .then(response => response.data)
+                    .then(tweetIdsResponse => {
+                        setUserCity(userCityResponse["city"]);
+                        setTweetIds(tweetIdsResponse);
+                        setUserRequirement(pageTitles[locationName]);
+                    });
+            });
+        
+        
+    },[userRequirement,userCity,location.pathname]);
 
-    const [tweetLoaded,setTweetLoaded] = useState(false);
-
-    const tweetIDs = ["1390916742906580994","1390915959876116481","1390912576800759810",
-        "1390880977283534848","1390876416019812359","1390870953471614977","1390867439169142788","1390863814262890496",
-        "1390863468945842177"];
-    
     const tweetCards = [];
-    tweetIDs.map(tweet => {
-        return tweetCards.push(<Tweet key={tweet} tweetId={tweet} />);
-    });
-
+    for(let i=1;i<tweetIds.length;i++) {
+        tweetCards.push(<Tweet key={tweetIds[i]} tweetId={tweetIds[i]} />);
+    }
+    
     return (
         <Card className={classes.TweetsContainer}>
             <Card.Header>
                 <p style={{marginBottom:"0px",fontWeight:"bold"}}>Tweets for {userCity}</p>
-                <p style={{marginBottom:"0px",fontSize:"12px"}}>Showing Leads for Hospital Beds</p>
+                <p style={{marginBottom:"0px",fontSize:"12px"}}>Showing Leads for {userRequirement}</p>
             </Card.Header>
             <Card.Body className={classes.TweetsList}>
                 <Tweet 
-                    key={"1390917048117592065"} 
-                    tweetId={"1390917048117592065"} 
+                    key={tweetIds[0]} 
+                    tweetId={tweetIds[0]} 
                     onLoad={
                         tweetLoaded ? null : setTweetLoaded(true)
                     }

@@ -9,7 +9,7 @@ const Homepage = () => {
             <Container>
                 <Row>
                     <Col xs={6} md={4}>
-                        <FeatureCard fontAwesomeIcon="fas fa-pills" iconColor="#FD7272" cardText="Medicines" link="/medicies" />
+                        <FeatureCard fontAwesomeIcon="fas fa-pills" iconColor="#FD7272" cardText="Medicines" link="/medicines" />
                     </Col>
                     <Col xs={6} md={4}>
                         <FeatureCard fontAwesomeIcon="fas fa-procedures" iconColor="#B33771" cardText="Hospital Beds" link="/hospitalBeds" />
