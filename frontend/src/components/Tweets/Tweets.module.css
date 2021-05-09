@@ -1,0 +1,15 @@
+.TweetsContainer {
+    max-width:400px;
+    margin:20px auto;
+}
+
+.TweetsList {
+    max-height: 500px;
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.TweetsList::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
