@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
-from .helper_functions import api_data_fetcher,write_oxygendata_to_db,check_and_update_db,fetch_time_difference
+from .helper_functions import api_data_fetcher,write_oxygendata_to_db,check_and_update_db,fetch_time_difference,tweet_id_fetcher
 from .models import OxygenData
 import datetime,requests,csv
 from utils.hospital_beds_sources import HOSPITAL_BEDS_SOURCES
@@ -72,3 +72,13 @@ def hospital_beds_sources(request):
 
 def plasma_sources(request):
     return JsonResponse(PLASMA_DETAILS, safe=False)
+
+
+def tweet_id_fetcher(request):
+    location = request.GET.get("location")
+    requirement = request.GET.get("requirement")
+    requirement = requirement.replace(" ", "")
+
+    id_list = tweet_id_fetcher([location, requirement])
+
+    return JsonResponse(id_list, safe=False)
