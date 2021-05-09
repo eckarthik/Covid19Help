@@ -5,7 +5,6 @@ import Homepage from './components/Homepage/Homepage';
 import OxygenStatus from './components/OxygenStatus/OxygenStatus';
 import StateWiseDailyCase from './components/StateWiseDailyCase/StateWiseDailyCase';
 import HospitalBeds from './components/HospitalBeds/HospitalBeds';
-import Tweets from './components/Tweets/Tweets';
 import './App.css';
 
 class App extends Component {

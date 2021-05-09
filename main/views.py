@@ -5,6 +5,7 @@ from .models import OxygenData
 import datetime,requests,csv
 from utils.hospital_beds_sources import HOSPITAL_BEDS_SOURCES
 from utils.plasma_website_sources import PLASMA_DETAILS
+import urllib
 
 
 # Create your views here.
@@ -74,11 +75,13 @@ def plasma_sources(request):
     return JsonResponse(PLASMA_DETAILS, safe=False)
 
 
-def tweet_id_fetcher(request):
+def fetch_tweets(request):
     location = request.GET.get("location")
-    requirement = request.GET.get("requirement")
+    requirement = urllib.parse.unquote(request.GET.get("requirement"))
     requirement = requirement.replace(" ", "")
 
-    id_list = tweet_id_fetcher([location, requirement])
+    print(location,requirement)
 
+    id_list = tweet_id_fetcher([location, requirement])
+    id_list = list(map(lambda id:str(id),id_list))
     return JsonResponse(id_list, safe=False)
