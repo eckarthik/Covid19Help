@@ -1,0 +1,27 @@
+.SourceLink {
+    text-decoration: none!important;
+    color:black;
+}
+
+.SourceLink:hover {
+    text-decoration: none!important;
+    color:black;
+}
+
+.SourceList {
+    margin:auto;
+    margin-top:50px;
+    width:600px;
+}
+
+.InfoTag {
+    padding:10px 10px 0px 10px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .SourceList {
+        width:90%;
+        font-size: 12px;
+    }
+}
