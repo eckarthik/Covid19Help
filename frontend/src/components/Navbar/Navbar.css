@@ -17,6 +17,9 @@ nav.navbar {
     -webkit-box-shadow: 1px 8px 13px -14px rgba(0,0,0,0.75);
     -moz-box-shadow: 1px 8px 13px -14px rgba(0,0,0,0.75);
     box-shadow: 1px 8px 13px -14px rgba(0,0,0,0.75);
+    position: fixed;
+    width: 100%;
+    z-index: 999
 }
 
 .logo {
@@ -38,7 +41,9 @@ nav.navbar {
     color:black;
 
 }
-
+.navbar ul{
+    margin-bottom: unset;
+}
 .burger {
     display: none;
     cursor: pointer;
@@ -67,17 +72,19 @@ nav.navbar {
         height:92vh;
         top:8vh;
         right:0px;
-        display:flex;
-        flex-direction: column;
+        display:block;
+        /* flex-direction: column; */
         width: 50%;
         transform: translateX(100%);
         align-items: center;
         color:white;
         z-index: 10;
         transition:transform 0.5s ease-in;
+        text-align: center;
     }
     .nav-links li {
         opacity: 0;
+        margin: 15% 0%;
     }
 
     .burger {
