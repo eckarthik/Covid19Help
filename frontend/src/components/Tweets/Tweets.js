@@ -17,6 +17,9 @@ const Tweets = (props) => {
     const location = useLocation();
 
     useEffect(() => {
+        console.log("User Requirement = ",userRequirement);
+        console.log("UserCity = ",userRequirement);
+        console.log("location.pathname = ",userRequirement);
         axios.get("https://geolocation-db.com/json/")
             .then(response => response.data)
             .then(userCityResponse => {
@@ -31,7 +34,7 @@ const Tweets = (props) => {
             });
         
         
-    },[userRequirement,userCity,location.pathname]);
+    },[]);
 
     const tweetCards = [];
     for(let i=1;i<tweetIds.length;i++) {

@@ -5,6 +5,7 @@ from .models import OxygenData
 import datetime,requests,csv
 from utils.hospital_beds_sources import HOSPITAL_BEDS_SOURCES
 from utils.plasma_website_sources import PLASMA_DETAILS
+from utils.cities_list import INDIAN_CITIES
 import urllib
 
 
@@ -85,3 +86,14 @@ def fetch_tweets(request):
     id_list = tweet_id_fetcher([location, requirement])
     id_list = list(map(lambda id:str(id),id_list))
     return JsonResponse(id_list, safe=False)
+
+def city_suggestions(request):
+    """Returns the city suggestions for the given text"""
+
+    input_text = request.GET.get("search")
+    suggestions = []
+    for city in INDIAN_CITIES:
+        if str(city["city"]).lower().startswith(input_text.lower()):
+            suggestions.append(city)
+
+    return JsonResponse(suggestions,safe=False)

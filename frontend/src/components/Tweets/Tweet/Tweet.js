@@ -8,7 +8,8 @@ const Tweet = (props) => {
             <TwitterTweetEmbed
                 tweetId={props.tweetId}
                 options={{
-                    cards: 'hidden'
+                    cards: 'hidden',
+                    conversation: 'none'
                 }}
                 onLoad={props.onLoad}
                 placeholder={props.placeholder}
