@@ -1481,3 +1481,15 @@ INDIAN_CITIES = [
 	{"city":"Chennai", "state":"Tamil Nadu"},
 	{"city":"Coimbatore", "state":"Tamil Nadu"}
 ]
+
+TOP_INDIAN_CITIES = [
+	{"city":"Agra", "state":"Uttar Pradesh"},
+	{"city":"Bangalore", "state":"Karnataka"},
+	{"city":"Chennai", "state":"Tamil Nadu"},
+	{"city":"Delhi", "state":"Delhi"},
+	{"city":"Hyderabad", "state":"Andhra Pradesh"},
+	{"city":"Kolkata", "state":"West Bengal"},
+	{"city":"Mumbai", "state":"Maharashtra"},
+	{"city":"Thiruvananthapuram", "state":"Kerala"},
+	{"city":"Vijayawada", "state":"Andhra Pradesh"},
+]
