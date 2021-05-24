@@ -85,9 +85,9 @@ if os.environ.get('HEROKU_DEPLOYMENT'):
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'd8avolm2j9rujo',
-            "USER": 'dxrpxwotlyvjet',
-            "PASSWORD": "745efbca212b2668e07e1380941d1b1eb6b9b33a3d4dd4fdb3c742657c000108",
-            "HOST": 'ec2-54-155-87-214.eu-west-1.compute.amazonaws.com'
+            "USER": 'zbbixmjlrfvgmd',
+            "PASSWORD": "cceace8a4c32a05e3359f6e0d66ba8dc0853a7b241fc1ea0584a5bc037e6369e",
+            "HOST": 'ec2-34-253-116-145.eu-west-1.compute.amazonaws.com'
         }
     }
 else:
