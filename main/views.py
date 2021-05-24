@@ -5,7 +5,7 @@ from .models import OxygenData
 import datetime,requests,csv
 from utils.hospital_beds_sources import HOSPITAL_BEDS_SOURCES
 from utils.plasma_website_sources import PLASMA_DETAILS
-from utils.cities_list import INDIAN_CITIES
+from utils.cities_list import INDIAN_CITIES,TOP_INDIAN_CITIES
 import urllib
 
 
@@ -90,10 +90,15 @@ def fetch_tweets(request):
 def city_suggestions(request):
     """Returns the city suggestions for the given text"""
 
-    input_text = request.GET.get("search")
+    input_text = request.GET.get("search") or None
     suggestions = []
-    for city in INDIAN_CITIES:
-        if str(city["city"]).lower().startswith(input_text.lower()):
+
+    if input_text is None:
+        for city in TOP_INDIAN_CITIES:
             suggestions.append(city)
+    else:
+        for city in INDIAN_CITIES:
+            if str(city["city"]).lower().startswith(input_text.lower()):
+                suggestions.append(city)
 
     return JsonResponse(suggestions,safe=False)
