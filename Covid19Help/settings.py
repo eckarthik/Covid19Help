@@ -84,7 +84,7 @@ if os.environ.get('HEROKU_DEPLOYMENT'):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'd8avolm2j9rujo',
+            'NAME': 'd6jfeei5cq9tkd',
             "USER": 'zbbixmjlrfvgmd',
             "PASSWORD": "cceace8a4c32a05e3359f6e0d66ba8dc0853a7b241fc1ea0584a5bc037e6369e",
             "HOST": 'ec2-34-253-116-145.eu-west-1.compute.amazonaws.com'
